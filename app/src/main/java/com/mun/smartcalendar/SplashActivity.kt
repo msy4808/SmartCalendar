@@ -2,6 +2,7 @@ package com.mun.smartcalendar
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -36,6 +37,7 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        Log.d(javaClass.simpleName, "SplashActivity :: Start")
         setContent {
             SmartCalendarTheme {
                 Scaffold(
