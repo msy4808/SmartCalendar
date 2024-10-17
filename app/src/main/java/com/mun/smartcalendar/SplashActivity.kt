@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +15,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,23 +57,36 @@ class SplashActivity : ComponentActivity() {
 
 @Composable
 fun WelcomeSplash(modifier: Modifier = Modifier) {
+
+    var isVisible by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        delay(500)
+        isVisible = true
+    }
+    val alpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 1000)
+    )
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize().background(SplashBackGround)
+        modifier = modifier
+            .fillMaxSize()
+            .background(SplashBackGround)
     ) {
         Text(
             modifier = modifier,
             text = stringResource(id = R.string.welcome),
             fontWeight = FontWeight.ExtraBold,
-            color = Color.White,
+            color = Color(Color.White.value).copy(alpha = alpha),
             fontSize = 30.sp
         )
         Text(
             modifier = modifier,
             text = stringResource(id = R.string.app_name),
             fontWeight = FontWeight.ExtraBold,
-            color = Color.White,
+            color = Color(Color.White.value).copy(alpha = alpha),
             fontSize = 30.sp
         )
     }
