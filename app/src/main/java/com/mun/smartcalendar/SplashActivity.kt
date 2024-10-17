@@ -1,0 +1,73 @@
+package com.mun.smartcalendar
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
+import com.mun.smartcalendar.ui.theme.SmartCalendarTheme
+import com.mun.smartcalendar.ui.theme.SplashBackGround
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+class SplashActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            SmartCalendarTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    WelcomeSplash(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+        lifecycleScope.launch {
+            delay(2000)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
+        }
+    }
+}
+
+@Composable
+fun WelcomeSplash(modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxSize().background(SplashBackGround)
+    ) {
+        Text(
+            modifier = modifier,
+            text = stringResource(id = R.string.welcome),
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.White,
+            fontSize = 30.sp
+        )
+        Text(
+            modifier = modifier,
+            text = stringResource(id = R.string.app_name),
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.White,
+            fontSize = 30.sp
+        )
+    }
+}
