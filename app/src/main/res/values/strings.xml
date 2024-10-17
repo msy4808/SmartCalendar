@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SmartCalendar</string>
+    <string name="title_activity_splash">SplashActivity</string>
     <string name="welcome">welcome</string>
 </resources>
