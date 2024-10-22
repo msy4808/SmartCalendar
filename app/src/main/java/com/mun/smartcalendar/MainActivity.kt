@@ -18,10 +18,20 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.mun.smartcalendar.ui.theme.SelectedIcon
 import com.mun.smartcalendar.ui.theme.SmartCalendarTheme
 import com.mun.smartcalendar.ui.theme.SplashBackGround
 
@@ -30,37 +40,48 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             SmartCalendarTheme {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     bottomBar = {
                         BottomAppBar(Modifier.background(SplashBackGround)) {
                             IconButton(
-                                onClick = {},
+                                onClick = { navController.navigate("calendar") },
                                 Modifier.weight(1f)
                             ) {
                                 Icon(
                                     imageVector = Icons.Filled.DateRange,
-                                    contentDescription = null
+                                    contentDescription = null,
+                                    tint = if (currentRoute == "calendar") SelectedIcon else Color.White
                                 )
                             }
                             IconButton(
-                                onClick = {},
+                                onClick = { navController.navigate("test") },
                                 Modifier.weight(1f)
                             ) {
-                                Icon(imageVector = Icons.Filled.Search, contentDescription = null)
+                                Icon(imageVector = Icons.Filled.Search,
+                                    contentDescription = null,
+                                    tint = if (currentRoute == "test") SelectedIcon else Color.White
+                                )
                             }
                             IconButton(
-                                onClick = {},
+                                onClick = { navController.navigate("test2") },
                                 Modifier.weight(1f)
                             ) {
-                                Icon(imageVector = Icons.Filled.Info, contentDescription = null)
+                                Icon(imageVector = Icons.Filled.Info,
+                                    contentDescription = null,
+                                    tint = if (currentRoute == "test2") SelectedIcon else Color.White
+                                )
                             }
                         }
                     }) { innerPadding ->
-                    MainScreen(
+                    AppNavigation(
                         modifier = Modifier
                             .padding(innerPadding)
-                            .background(Color.White)
+                            .background(Color.White),
+                        navController = navController
                     )
                 }
             }
@@ -69,17 +90,35 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun CalendarScreen(modifier: Modifier = Modifier) {
     Box(modifier.fillMaxSize(),
         contentAlignment = Alignment.Center) {
-        Text(text = "Test")
+        Text(text = "CalendarScreen")
+    }
+}
+@Composable
+fun TestScreen(modifier: Modifier = Modifier) {
+    Box(modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center) {
+        Text(text = "TestScreen")
+    }
+}
+@Composable
+fun TestScreen2(modifier: Modifier = Modifier) {
+    Box(modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center) {
+        Text(text = "TestScreen2")
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    SmartCalendarTheme {
-        MainScreen(modifier = Modifier)
+fun AppNavigation(modifier: Modifier = Modifier, navController: NavHostController) {
+
+    //NavHost Setting
+    NavHost(navController = navController, startDestination = "calendar") {
+        //Define each screen as composable
+        composable("calendar") { CalendarScreen(modifier) }
+        composable("test") { TestScreen(modifier) }
+        composable("test2") { TestScreen2(modifier) }
     }
 }

@@ -66,4 +66,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("androidx.navigation:navigation-compose:2.8.3")
+    implementation("com.kizitonwose.calendar:view:2.3.2")
+    implementation("com.kizitonwose.calendar:compose:1.4.2")
 }
