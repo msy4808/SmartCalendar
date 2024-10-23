@@ -38,87 +38,11 @@ import com.mun.smartcalendar.ui.theme.SplashBackGround
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
-            val navController = rememberNavController()
             SmartCalendarTheme {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentRoute = navBackStackEntry?.destination?.route
-                Scaffold(modifier = Modifier.fillMaxSize(),
-                    bottomBar = {
-                        BottomAppBar(Modifier.background(SplashBackGround)) {
-                            IconButton(
-                                onClick = { navController.navigate("calendar") },
-                                Modifier.weight(1f)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.DateRange,
-                                    contentDescription = null,
-                                    tint = if (currentRoute == "calendar") SelectedIcon else Color.White
-                                )
-                            }
-                            IconButton(
-                                onClick = { navController.navigate("test") },
-                                Modifier.weight(1f)
-                            ) {
-                                Icon(imageVector = Icons.Filled.Search,
-                                    contentDescription = null,
-                                    tint = if (currentRoute == "test") SelectedIcon else Color.White
-                                )
-                            }
-                            IconButton(
-                                onClick = { navController.navigate("test2") },
-                                Modifier.weight(1f)
-                            ) {
-                                Icon(imageVector = Icons.Filled.Info,
-                                    contentDescription = null,
-                                    tint = if (currentRoute == "test2") SelectedIcon else Color.White
-                                )
-                            }
-                        }
-                    }) { innerPadding ->
-                    AppNavigation(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .background(Color.White),
-                        navController = navController
-                    )
-                }
+                CommonBaseScreen()
             }
         }
-    }
-}
-
-@Composable
-fun CalendarScreen(modifier: Modifier = Modifier) {
-    Box(modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center) {
-        Text(text = "CalendarScreen")
-    }
-}
-@Composable
-fun TestScreen(modifier: Modifier = Modifier) {
-    Box(modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center) {
-        Text(text = "TestScreen")
-    }
-}
-@Composable
-fun TestScreen2(modifier: Modifier = Modifier) {
-    Box(modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center) {
-        Text(text = "TestScreen2")
-    }
-}
-
-@Composable
-fun AppNavigation(modifier: Modifier = Modifier, navController: NavHostController) {
-
-    //NavHost Setting
-    NavHost(navController = navController, startDestination = "calendar") {
-        //Define each screen as composable
-        composable("calendar") { CalendarScreen(modifier) }
-        composable("test") { TestScreen(modifier) }
-        composable("test2") { TestScreen2(modifier) }
     }
 }
