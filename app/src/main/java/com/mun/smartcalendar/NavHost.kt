@@ -18,13 +18,13 @@ fun NavHost(modifier: Modifier = Modifier, navController: NavHostController) {
 
         composable(route = Destination.TEST.name) { TestScreen(context, navController) }
 
-        composable(route = Destination.TEST2.name) { TestScreen2(context, navController) }
+        composable(route = Destination.USER.name) { UserScreen(context, navController) }
     }
 }
 
 enum class Destination(name: String) {
     CALENDAR("calendar"),
     TEST("test"),
-    TEST2("test2")
+    USER("user")
 
 }

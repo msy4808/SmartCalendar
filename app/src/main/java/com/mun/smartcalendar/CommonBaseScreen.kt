@@ -56,7 +56,7 @@ fun CommonBaseScreen() {
                     )
                 }
                 IconButton(
-                    onClick = { navController.navigate(Destination.TEST2.name) {
+                    onClick = { navController.navigate(Destination.USER.name) {
                         popUpTo(navController.graph.startDestinationId) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
@@ -65,7 +65,7 @@ fun CommonBaseScreen() {
                 ) {
                     Icon(imageVector = Icons.Filled.Info,
                         contentDescription = null,
-                        tint = if (currentRoute == Destination.TEST2.name) SelectedIcon else Color.White
+                        tint = if (currentRoute == Destination.USER.name) SelectedIcon else Color.White
                     )
                 }
             }
