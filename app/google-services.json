@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "916650832238",
+    "project_id": "smartcalendar-43057",
+    "storage_bucket": "smartcalendar-43057.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916650832238:android:db25293bd110c19ae3d17f",
+        "android_client_info": {
+          "package_name": "com.mun.smartcalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916650832238-al6bkng46ea3dlubc4vbvu5ma4ddtdtl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mun.smartcalendar",
+            "certificate_hash": "7beeb9a3e22c308ac68d30c55a118f0464140987"
+          }
+        },
+        {
+          "client_id": "916650832238-2de4g4fh07ku3t33ct5buo472c01ojco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzcJSBCHCa2_pIVADmJdy7foDZesiyJmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916650832238-2de4g4fh07ku3t33ct5buo472c01ojco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

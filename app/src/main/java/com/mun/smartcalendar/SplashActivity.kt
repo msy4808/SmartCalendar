@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mun.smartcalendar.ui.theme.SmartCalendarTheme
 import com.mun.smartcalendar.ui.theme.SplashBackGround
 import kotlinx.coroutines.delay
@@ -51,7 +52,7 @@ class SplashActivity : ComponentActivity() {
         }
         lifecycleScope.launch {
             delay(2000)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
         }
     }
@@ -59,6 +60,10 @@ class SplashActivity : ComponentActivity() {
 
 @Composable
 fun WelcomeSplash(modifier: Modifier = Modifier) {
+
+    //상태바 색상 설정
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = SplashBackGround)
 
     var isVisible by remember { mutableStateOf(false) }
 

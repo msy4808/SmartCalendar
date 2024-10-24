@@ -2,4 +2,8 @@
     <string name="app_name">SmartCalendar</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="welcome">welcome</string>
+    <string name="web_client_id">916650832238-2de4g4fh07ku3t33ct5buo472c01ojco.apps.googleusercontent.com</string>
+    <string name="app_client_id">916650832238-al6bkng46ea3dlubc4vbvu5ma4ddtdtl.apps.googleusercontent.com</string>
+    <string name="title_activity_login">LoginActivity</string>
+
 </resources>
