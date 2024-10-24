@@ -114,7 +114,6 @@ class LoginActivity : ComponentActivity() {
             val account = completedTask.getResult(ApiException::class.java)
 
             //파이어베이스 서버에 저장을 해야함
-            //그리고 로그인 되어있으면 자동으로 메인으로 넘어가야함 이건 Splash에서 처리
             val email = account?.email.toString()
             val displayName = account?.displayName.toString()
             Log.d("success", "signInResult:$email / $displayName")
@@ -123,6 +122,16 @@ class LoginActivity : ComponentActivity() {
 
         } catch (e: ApiException){
             Log.w("failed", "signInResult:failed code=" + e.statusCode)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val account = this.let { GoogleSignIn.getLastSignedInAccount(it) }
+
+        if (account != null) { //null을 반환하면 아직 로그인 전이기 때문. null이 아니라면 로그인 한 상태
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }
