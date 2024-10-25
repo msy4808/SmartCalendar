@@ -9,3 +9,5 @@
 https://velog.io/@msy4808/posts
 
 2024/10/25 SHA-1 관련 포스트
+
+2024/10/26 ~ Google 로그인기능 관련 포스트 작성
