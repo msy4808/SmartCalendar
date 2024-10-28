@@ -34,6 +34,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.mun.smartcalendar.ui.theme.LoginBackGround
 import com.mun.smartcalendar.ui.theme.Navy
 import com.mun.smartcalendar.ui.theme.SmartCalendarTheme
@@ -42,6 +45,8 @@ import com.mun.smartcalendar.ui.theme.SmartCalendarTheme
 class LoginActivity : ComponentActivity() {
 
     private val googleSigninClient: GoogleSignInClient by lazy { getGoogleClient() }
+    private val firestore = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +98,7 @@ class LoginActivity : ComponentActivity() {
 
     private fun getGoogleClient(): GoogleSignInClient {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestServerAuthCode(getString(R.string.web_client_id)) // string 파일에 저장해둔 client id 를 이용해 server authcode를 요청한다.
+            .requestIdToken(getString(R.string.web_client_id)) // string 파일에 저장해둔 client id 를 이용해 server authcode를 요청한다.
             .requestEmail() // 이메일 요청
             .build()
 
@@ -112,17 +117,47 @@ class LoginActivity : ComponentActivity() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>){
         try {
             val account = completedTask.getResult(ApiException::class.java)
+            val idToken = account?.idToken
 
-            //파이어베이스 서버에 저장을 해야함
-            val email = account?.email.toString()
-            val displayName = account?.displayName.toString()
-            Log.d("success", "signInResult:$email / $displayName")
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            //Google 계정을 Firebase 인증에 연결
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener { authTask ->
+                    if (authTask.isSuccessful) {
+                        val firebaseUser = auth.currentUser
+                        val email = firebaseUser?.email ?: "No Email"
+                        val name = firebaseUser?.displayName ?: "No Name"
+                        saveUserToFireStore(email, name, firebaseUser?.uid?: "")
 
+                        Log.d("Auth Success", "signInWithCredential:success - $email, $name")
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    } else {
+                        Log.w("Auth Failed", "signInWithCredential:failure", authTask.exception)
+                    }
+                }
         } catch (e: ApiException){
             Log.w("failed", "signInResult:failed code=" + e.statusCode)
         }
+    }
+
+    private fun saveUserToFireStore(email: String, name: String, userId: String) {
+        val user = hashMapOf(
+            "email" to email,
+            "name" to name,
+            "timestamp" to System.currentTimeMillis()
+        )
+
+        //users로 컬렉션을 만들고 그 아래에 uid로 document Id를 사용하여 저장(폴더명이 각 유저별 uid라고 생각하면됨)
+        firestore.collection("users")
+            .document(userId)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("firestore success", "User saved SuccessFully.")
+            }
+            .addOnFailureListener { e ->
+                Log.d("firestore Failed", "Error saving User : $e")
+            }
     }
 
     override fun onStart() {

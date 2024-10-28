@@ -70,12 +70,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     //Google Login
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-    implementation("com.google.firebase:firebase-auth:23.1.0")
-    implementation("com.google.firebase:firebase-auth:23.1.0")
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-    implementation("com.google.gms:google-services:4.4.2")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
+    implementation(libs.google.services)
+    implementation(libs.firebase.firestore)
     implementation(libs.firebase.analytics)
 
     implementation(libs.accompanist.systemuicontroller)

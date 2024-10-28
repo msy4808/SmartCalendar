@@ -45,4 +45,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    companion object {
+        var userEmail: String = ""
+        var userName: String = ""
+    }
 }

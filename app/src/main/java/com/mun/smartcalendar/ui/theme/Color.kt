@@ -16,3 +16,6 @@ val Navy = Color(0xFF2C3E50)
 
 
 val SelectedIcon = Color(0xFFA0E7FF)
+
+val LightGray = Color(0xFFF5F5F5)
+val UltraLightGray = Color(0xFFE0E0E0)
