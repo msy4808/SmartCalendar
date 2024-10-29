@@ -4,7 +4,9 @@
    
 3. 기술 스택: Firebase로 실시간 데이터베이스 처리, Jetpack Compose로 UI 구현, WorkManager로 백그라운드 작업
    
-5. 추가: Google Calendar API와 연동하여 구글 캘린더와 동기화 가능
+5. 추가: Google Calendar API와 연동하여 구글 캘린더와 동기화 가능, FCM을 이용하여 사용자에게 푸쉬알림 기능 구현
+
+6. 보류 : 날씨관련 기능 추가, 음성입력 기능(정확도 문제)
 
 https://velog.io/@msy4808/posts
 
