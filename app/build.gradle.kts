@@ -78,4 +78,8 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation(libs.accompanist.systemuicontroller)
+
+    // hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.android.compiler)
 }
