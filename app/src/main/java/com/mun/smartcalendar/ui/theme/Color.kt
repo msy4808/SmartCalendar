@@ -19,3 +19,9 @@ val SelectedIcon = Color(0xFFA0E7FF)
 
 val LightGray = Color(0xFFF5F5F5)
 val UltraLightGray = Color(0xFFE0E0E0)
+
+val White = Color(0xFFFFFFFF)
+val Black = Color(0xFF000000)
+val Orange = Color(0xFFFF7F00)
+val Gray = Color(0xFF868E96)
+val LightGray2 = Color(0x80B9BCBE)
