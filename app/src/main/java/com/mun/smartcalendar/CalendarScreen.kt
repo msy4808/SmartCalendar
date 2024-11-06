@@ -123,6 +123,16 @@ fun CalendarScreen(
             }
         }
     }
+    if (showCalendarBottomSheet) {
+        CalendarBottomSheet(
+            onDismissRequest = {showCalendarBottomSheet = false},
+            onClickedTodayButton = {
+                calendarViewModel.initDateToToday()
+                onClickedTodayButton = true
+            },
+            viewModel = calendarViewModel
+        )
+    }
 
 }
 

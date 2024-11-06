@@ -83,4 +83,6 @@ dependencies {
     // hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.android.compiler)
+
+    implementation("com.holix.android:bottomsheetdialog-compose:1.3.2")
 }
