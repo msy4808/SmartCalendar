@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mun.smartcalendar.ui.theme.White
 
@@ -46,7 +47,7 @@ fun CalendarScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val calendarViewModel = CalendarViewModel()
+    val calendarViewModel: CalendarViewModel = hiltViewModel()
     val selectedDate by calendarViewModel.selectedDate.collectAsState()
     val totalWeeks = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         getWeeksOfMonth(selectedDate.year, selectedDate.monthValue, selectedDate.month.maxLength())

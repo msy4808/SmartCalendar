@@ -83,6 +83,8 @@ dependencies {
     // hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.android.compiler)
+    implementation("com.google.dagger:hilt-android:2.50")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation("com.holix.android:bottomsheetdialog-compose:1.3.2")
 }

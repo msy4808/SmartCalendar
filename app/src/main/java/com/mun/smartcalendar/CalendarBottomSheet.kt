@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.holix.android.bottomsheetdialog.compose.BottomSheetDialog
 import com.mun.smartcalendar.ui.theme.Black
 import com.mun.smartcalendar.ui.theme.Gray
@@ -50,7 +51,7 @@ fun CalendarBottomSheet(
     onDismissRequest: () -> Unit,
     onClickedTodayButton: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: CalendarViewModel = CalendarViewModel()
+    viewModel: CalendarViewModel = hiltViewModel()
 ) {
     val selectedDate by viewModel.selectedDate.collectAsState()
 
