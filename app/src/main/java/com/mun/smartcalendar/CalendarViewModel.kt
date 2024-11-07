@@ -8,9 +8,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import javax.inject.Inject
 
 @HiltViewModel
-class CalendarViewModel: ViewModel() {
+class CalendarViewModel @Inject constructor(): ViewModel() {
 
     private val _selectedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         MutableStateFlow<LocalDate>(LocalDate.now())

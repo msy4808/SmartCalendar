@@ -40,8 +40,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.mun.smartcalendar.ui.theme.LoginBackGround
 import com.mun.smartcalendar.ui.theme.Navy
 import com.mun.smartcalendar.ui.theme.SmartCalendarTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
 
     private val googleSigninClient: GoogleSignInClient by lazy { getGoogleClient() }
